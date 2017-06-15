@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"     android:gravity="center">
+
+    <TextView
+        android:id="@+id/tNameCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nazwa miejcowosc"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tWspolrzedne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Współrzędne"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tDlu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Długość"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tDluWart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tSzer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Szerokość"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tSzerWart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tCzas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Czas"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tCzasWart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tTemp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Temperatura"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tTempWart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tCis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ciśnienie"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tCisWart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tOpis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TUTAJ MA BYć JAKIś FAJNY OPIS POGODY CZY COS TAIEGO NIE WIEM O CO CHODZI XD "
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+</LinearLayout>

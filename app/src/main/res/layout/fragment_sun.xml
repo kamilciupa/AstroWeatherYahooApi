@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/holo_orange_light"
+    android:orientation="vertical"
+    android:weightSum="4"
+    android:gravity="center"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+    1
+
+    <TextView
+        android:id="@+id/tSun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Słońce"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tTimeSun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="00:00:00"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tWschodS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wschod"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tWschodSCzas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Czas"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tWschodSCzasWartosc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tWschodSAzym"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Azymut"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tWschodSAzymWart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tZachodS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zachód"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tZachodSCzas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Czas"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tZachodSCzasWartosc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tZachodSAzymut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Azymut"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tZachodSAzymutWarto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tZmierzchISwit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zmierzch i Swit Cywilny"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tZmierzch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zmierzch"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tZmierzchWart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tSwit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Swit cywilny"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tSwitWart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
