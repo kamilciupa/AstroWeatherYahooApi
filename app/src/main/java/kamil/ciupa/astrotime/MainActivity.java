@@ -1,5 +1,7 @@
 package kamil.ciupa.astrotime;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
@@ -23,11 +25,18 @@ import android.widget.Toast;
 
 import com.astrocalculator.AstroCalculator;
 import com.astrocalculator.AstroDateTime;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +50,61 @@ public class MainActivity extends AppCompatActivity {
     String baseurl = "https://query.yahooapis.com/v1/public/yql?q=";
     String city;
     String weatherQuery;
+
+    String MWdesc;
+    String MWnazwaMiejsc;
+    String MWdlugosc ;
+    String MWszerokosc ;
+    String MWtemperatura ;
+    String WIwiatrSila;
+
+    public String getMWdesc(){
+        return MWdesc;
+    }
+
+    public String getWIwiatrSila() {
+        return WIwiatrSila;
+    }
+
+    public String getWIwiatrKierunek() {
+        return WIwiatrKierunek;
+    }
+
+    public String getWIwilgotnosc() {
+        return WIwilgotnosc;
+    }
+
+    public String getWIwidocznosc() {
+        return WIwidocznosc;
+    }
+
+    String WIwiatrKierunek;
+    String WIwilgotnosc;
+    String WIwidocznosc;
+
+    public String getMWnazwaMiejsc() {
+        return MWnazwaMiejsc;
+    }
+
+    public String getMWdlugosc() {
+        return MWdlugosc;
+    }
+
+    public String getMWszerokosc() {
+        return MWszerokosc;
+    }
+
+    public String getMWtemperatura() {
+        return MWtemperatura;
+    }
+
+    public String getMWcisnienie() {
+        return MWcisnienie;
+    }
+
+    String MWcisnienie ;
+
+
 
     public int getRefTime() { return refreshtime;}
     public double getLatitude(){
@@ -73,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
 
         city = "lodz";
         weatherQuery = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
+
+        getDataFromInternet();
+
     }
 
     @Override
@@ -117,24 +184,57 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void getDataFromInternet(){
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(baseurl + weatherQuery, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+
+                String response = new String(responseBody);
+
+                try{
+                    JSONObject responsee = new JSONObject(response);
+                    JSONObject query = responsee.getJSONObject("query");
+                    JSONObject results = query.getJSONObject("results");
+                    JSONObject channel = results.getJSONObject("channel");
+
+                    JSONObject item = channel.getJSONObject("item");
+                    JSONObject condition = item.getJSONObject("condition");
+                    JSONObject loc = channel.getJSONObject("location");
+                    JSONObject atmosphere = channel.getJSONObject("atmosphere");
+                    JSONObject wind = channel.getJSONObject("wind");
+
+                    MWnazwaMiejsc = loc.getString("city");
+                    MWcisnienie = atmosphere.getString("pressure");
+                    MWdlugosc = item.getString("lat");
+                    MWszerokosc = item.getString("long");
+                    MWtemperatura = condition.getString("temp");
+                    MWdesc = item.getString("description");
+
+
+                    WIwiatrKierunek = wind.getString("direction");
+                    WIwiatrSila = wind.getString("speed");
+                    WIwidocznosc = atmosphere.getString("visibility");
+                    WIwilgotnosc = atmosphere.getString("humidity");
 
 
 
-
-    private void getDataFromAPI(){
-
-        // isOnline
-            // get city from option
-        //String cityName = "lodz";
-       
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
+            }
 
-        //AsyncHttpClient
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
+            }
+        });
 
     }
-
 
 
 

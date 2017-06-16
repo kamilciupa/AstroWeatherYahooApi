@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by Kamil on 2017-06-15.
  */
@@ -28,6 +31,31 @@ public class MainWeather extends Fragment {
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.fragment_main_weather, container, false);
 
+
+        try {
+            Timer autoUpdate = new Timer();
+            autoUpdate.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        getActivity().runOnUiThread(new Runnable() {
+                            public void run() {
+                                setData(((MainActivity) getActivity()).getMWcisnienie(),
+                                        ((MainActivity) getActivity()).getMWdlugosc(),
+                                        ((MainActivity) getActivity()).getMWszerokosc(),
+                                        ((MainActivity) getActivity()).getMWnazwaMiejsc(),
+                                        ((MainActivity) getActivity()).getMWtemperatura(),
+                                        (((MainActivity) getActivity()).getMWdesc())
+                                        , view);
+                            }
+                        });
+                    } catch(Exception e) {}
+                }
+
+            }, 0, 60000);
+        } catch(Exception e) {}
+
+
         return view;
     }
 
@@ -43,6 +71,18 @@ public class MainWeather extends Fragment {
     }
 
 
+    public void setData(String cis, String dl, String szer, String nazwa, String temp, String desc, View view){
+
+        initiateElements(view);
+
+        nazwaMiejsc.setText(nazwa);
+        dlugosc.setText(dl);
+        szerokosc.setText(szer);
+        temperatura.setText(temp + " F");
+        cisnienie.setText(cis + " in");
+        //opis.setText(desc);
+
+    }
 
 
 
