@@ -52,11 +52,16 @@ public class MainActivity extends AppCompatActivity {
     String weatherQuery;
 
     String MWdesc;
+    String MNkraj;
     String MWnazwaMiejsc;
     String MWdlugosc ;
     String MWszerokosc ;
     String MWtemperatura ;
     String WIwiatrSila;
+
+    public String getMNkraj(){
+        return MNkraj;
+    }
 
     public String getMWdesc(){
         return MWdesc;
@@ -135,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        city = "lodz";
+        city = "london";
         weatherQuery = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
 
         getDataFromInternet();
@@ -207,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject wind = channel.getJSONObject("wind");
 
                     MWnazwaMiejsc = loc.getString("city");
+                    MNkraj = loc.getString("country");
                     MWcisnienie = atmosphere.getString("pressure");
                     MWdlugosc = item.getString("lat");
                     MWszerokosc = item.getString("long");
@@ -256,10 +262,12 @@ public class MainActivity extends AppCompatActivity {
         final EditText lt = (EditText) dialogView.findViewById(R.id.LatitudeET);
         final EditText lg = (EditText) dialogView.findViewById(R.id.LongitudeET);
         final EditText refTime = (EditText) dialogView.findViewById(R.id.RefreshTimeET);
+        final EditText cityet = (EditText) dialogView.findViewById(R.id.CityET);
 
                     lt.setText(Double.toString(latitude));
                     lg.setText(Double.toString(longitude));
                     refTime.setText(Integer.toString(refreshtime));
+                    cityet.setText(city);
 
         a.setOnClickListener(new View.OnClickListener() {
 
@@ -268,6 +276,8 @@ public class MainActivity extends AppCompatActivity {
             try {
                 double lattest;
                 double lontest;
+                city = cityet.getText().toString();
+                getDataFromInternet();
                 lattest = Double.parseDouble(lt.getText().toString());
                 lontest = Double.parseDouble(lg.getText().toString());
                 refreshtime = Integer.parseInt(refTime.getText().toString());

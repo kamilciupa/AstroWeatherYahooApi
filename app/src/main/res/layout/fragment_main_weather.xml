@@ -2,31 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"     android:gravity="center">
+    android:layout_height="match_parent" android:background="@android:color/holo_green_light"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/tNameCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Nazwa miejcowosc"
         android:textAlignment="center"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:id="@+id/tWspolrzedne"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Współrzędne"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tDlu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Długość"
         android:textAlignment="center"
-        android:layout_gravity="center"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tDluWart"
@@ -40,9 +36,10 @@
         android:id="@+id/tSzer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Szerokość"
         android:textAlignment="center"
-        android:layout_gravity="center"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tSzerWart"
@@ -56,9 +53,10 @@
         android:id="@+id/tTemp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Temperatura"
         android:textAlignment="center"
-        android:layout_gravity="center"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tTempWart"
@@ -72,9 +70,10 @@
         android:id="@+id/tCis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Ciśnienie"
         android:textAlignment="center"
-        android:layout_gravity="center"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tCisWart"

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:gravity="center">
+    android:layout_height="match_parent" android:gravity="center" android:background="@android:color/holo_green_light">
 
     <TextView
         android:id="@+id/tMiastoInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Miejscowość"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tWiatrSila"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Siła wiatru"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tWiatrSilaWart"
@@ -29,21 +32,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Kierunek Wiatru"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tKierunekWart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="--"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tWilgot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Wilgotność"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tWilgotWart"
@@ -57,7 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Widoczność"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tWidoczWart"

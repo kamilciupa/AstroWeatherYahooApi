@@ -44,6 +44,7 @@ public class MainWeather extends Fragment {
                                         ((MainActivity) getActivity()).getMWdlugosc(),
                                         ((MainActivity) getActivity()).getMWszerokosc(),
                                         ((MainActivity) getActivity()).getMWnazwaMiejsc(),
+                                        ((MainActivity)  getActivity()).getMNkraj(),
                                         ((MainActivity) getActivity()).getMWtemperatura(),
                                         (((MainActivity) getActivity()).getMWdesc())
                                         , view);
@@ -52,7 +53,7 @@ public class MainWeather extends Fragment {
                     } catch(Exception e) {}
                 }
 
-            }, 0, 60000);
+            }, 0, 30);
         } catch(Exception e) {}
 
 
@@ -71,11 +72,11 @@ public class MainWeather extends Fragment {
     }
 
 
-    public void setData(String cis, String dl, String szer, String nazwa, String temp, String desc, View view){
+    public void setData(String cis, String dl, String szer, String nazwa, String kraj, String temp, String desc, View view){
 
         initiateElements(view);
 
-        nazwaMiejsc.setText(nazwa);
+        nazwaMiejsc.setText(nazwa + ", " + kraj);
         dlugosc.setText(dl);
         szerokosc.setText(szer);
         temperatura.setText(temp + " F");
