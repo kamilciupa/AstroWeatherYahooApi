@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.astrocalculator.AstroCalculator;
 import com.astrocalculator.AstroDateTime;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     PagerAdapter pagerAdapter;
     ViewPager viewPager;
     List<String> fragmentsList;
+    String baseurl = "https://query.yahooapis.com/v1/public/yql?q=";
+    String city;
+    String weatherQuery;
 
     public int getRefTime() { return refreshtime;}
     public double getLatitude(){
@@ -55,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentsList = new ArrayList<>();
         fragmentsList.add(FragmentSun.class.getName());
         fragmentsList.add(FragmentMoon.class.getName());
+        fragmentsList.add(MainWeather.class.getName());
+        fragmentsList.add(WeatherInfo.class.getName());
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         pagerAdapter = new MainActivity.MyPagerAdapter(getSupportFragmentManager());
         try{
@@ -63,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
         //
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        city = "lodz";
+        weatherQuery = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
     }
 
     @Override
@@ -106,6 +116,27 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+    private void getDataFromAPI(){
+
+        // isOnline
+            // get city from option
+        //String cityName = "lodz";
+       
+
+
+
+        //AsyncHttpClient
+
+
+    }
+
+
+
 
 
     /*
@@ -163,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
     private class MyPagerAdapter extends FragmentPagerAdapter {
 
         public List<String> fragmentsListAdapter = new ArrayList<>();
-        private int NUM_COUNT = 3;
+        private int NUM_COUNT = 4;
         double longitude, latitude;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
