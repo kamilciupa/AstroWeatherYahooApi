@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -32,33 +33,41 @@ public class MainWeather extends Fragment {
         view = inflater.inflate(R.layout.fragment_main_weather, container, false);
 
 
-        try {
-            Timer autoUpdate = new Timer();
-            autoUpdate.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    try {
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
+        Thread t = new Thread(){
+
+            @Override
+            public void run() {
+                try {
+                    getActivity().runOnUiThread(new Runnable() {
+                        public void run() {
+                            while(true) {
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                                 setData(((MainActivity) getActivity()).getMWcisnienie(),
                                         ((MainActivity) getActivity()).getMWdlugosc(),
                                         ((MainActivity) getActivity()).getMWszerokosc(),
                                         ((MainActivity) getActivity()).getMWnazwaMiejsc(),
-                                        ((MainActivity)  getActivity()).getMNkraj(),
+                                        ((MainActivity) getActivity()).getMNkraj(),
                                         ((MainActivity) getActivity()).getMWtemperatura(),
                                         (((MainActivity) getActivity()).getMWdesc())
                                         , view);
                             }
-                        });
-                    } catch(Exception e) {}
-                }
+                        }
+                    });
+                } catch(Exception e) {}
+            }
+        };
 
-            }, 0, 30);
-        } catch(Exception e) {}
+
+       t.start();
 
 
         return view;
     }
+
 
 
 

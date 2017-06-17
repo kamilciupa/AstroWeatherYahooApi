@@ -49,7 +49,7 @@ public class WeatherInfo extends Fragment {
                     } catch(Exception e) {}
                 }
 
-            }, 0, 30);
+            }, 0, 1);
         } catch(Exception e) {}
 
 

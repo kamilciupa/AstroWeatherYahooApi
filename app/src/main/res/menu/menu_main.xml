@@ -7,4 +7,11 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/refreshButton"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_rotate"
+        />
 </menu>

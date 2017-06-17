@@ -1,6 +1,9 @@
 package kamil.ciupa.astrotime;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -21,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astrocalculator.AstroCalculator;
@@ -31,6 +35,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     String baseurl = "https://query.yahooapis.com/v1/public/yql?q=";
     String city;
     String weatherQuery;
+    WeatherInfo weatherInfo;
 
     String MWdesc;
     String MNkraj;
@@ -143,7 +149,8 @@ public class MainActivity extends AppCompatActivity {
         city = "london";
         weatherQuery = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
 
-        getDataFromInternet();
+
+      //      getDataFromInternet();
 
     }
 
@@ -186,8 +193,22 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             showOptionsDialog();
         }
+        if( id == R.id.refreshButton){
+            getDataFromInternet();
+        }
         return super.onOptionsItemSelected(item);
     }
+
+
+    public boolean accessToInternet(){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
+
+    }
+
+
 
     public void getDataFromInternet(){
 
@@ -218,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
                     MWszerokosc = item.getString("long");
                     MWtemperatura = condition.getString("temp");
                     MWdesc = item.getString("description");
+
 
 
                     WIwiatrKierunek = wind.getString("direction");
@@ -305,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
 
         public List<String> fragmentsListAdapter = new ArrayList<>();
         private int NUM_COUNT = 4;
-        double longitude, latitude;
+
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
