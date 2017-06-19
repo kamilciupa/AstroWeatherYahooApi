@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         weatherQuery = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
 
 
-      //      getDataFromInternet();
+            getDataFromInternet();
 
     }
 
@@ -213,7 +213,8 @@ public class MainActivity extends AppCompatActivity {
     public void getDataFromInternet(){
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(baseurl + weatherQuery, new AsyncHttpResponseHandler() {
+        client.get(baseurl + "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json",
+                new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
