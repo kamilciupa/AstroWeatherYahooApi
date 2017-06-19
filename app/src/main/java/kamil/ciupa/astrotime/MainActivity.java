@@ -37,6 +37,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -232,7 +240,73 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void writeToFile(String data,Context context) {
+        File file = new File(context.getFilesDir(), "config");
+        FileOutputStream outputStream;
+        try {
+            outputStream = openFileOutput("config", Context.MODE_PRIVATE);
+            outputStream.write(data.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    private String readFromFile(Context context) {
+
+    }
+
+    public void getDataFromLocal(){
+
+        String response = readFromFile(this);
+
+        try{
+            JSONObject responsee = new JSONObject(response);
+            JSONObject query = responsee.getJSONObject("query");
+            JSONObject results = query.getJSONObject("results");
+            JSONObject channel = results.getJSONObject("channel");
+
+            JSONObject item = channel.getJSONObject("item");
+            JSONObject condition = item.getJSONObject("condition");
+            JSONObject loc = channel.getJSONObject("location");
+            JSONObject atmosphere = channel.getJSONObject("atmosphere");
+            JSONObject wind = channel.getJSONObject("wind");
+
+
+            String descript = item.getString("description");
+            String[] descArr  = descript.split("<BR />");
+
+
+            d1 = descArr[6];
+            d2 = descArr[7];
+            d3 = descArr[8];
+            d4 = descArr[9];
+
+
+            MWnazwaMiejsc = loc.getString("city");
+            MNkraj = loc.getString("country");
+            MWcisnienie = atmosphere.getString("pressure");
+            MWdlugosc = item.getString("lat");
+            MWszerokosc = item.getString("long");
+            MWtemperatura = condition.getString("temp");
+            MWdesc = item.getString("description");
+
+
+
+            WIwiatrKierunek = wind.getString("direction");
+            WIwiatrSila = wind.getString("speed");
+            WIwidocznosc = atmosphere.getString("visibility");
+            WIwilgotnosc = atmosphere.getString("humidity");
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     public void getDataFromInternet(){
 
@@ -244,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 String response = new String(responseBody);
+                writeToFile(response, Context.);
 
                 try{
                     JSONObject responsee = new JSONObject(response);
