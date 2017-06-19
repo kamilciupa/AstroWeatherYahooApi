@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
     List<String> fragmentsList;
     String baseurl = "https://query.yahooapis.com/v1/public/yql?q=";
     String city;
-    String weatherQuery;
+    String weatherQueryIMP;
+    String weatherQueryMetric;
     WeatherInfo weatherInfo;
 
     String MWdesc;
@@ -64,6 +65,27 @@ public class MainActivity extends AppCompatActivity {
     String MWszerokosc ;
     String MWtemperatura ;
     String WIwiatrSila;
+
+    public String getD1() {
+        return d1;
+    }
+
+    public String getD2() {
+        return d2;
+    }
+
+    public String getD3() {
+        return d3;
+    }
+
+    public String getD4() {
+        return d4;
+    }
+
+    String d1;
+    String d2;
+    String d3;
+    String d4;
 
     public String getMNkraj(){
         return MNkraj;
@@ -136,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentsList.add(FragmentMoon.class.getName());
         fragmentsList.add(MainWeather.class.getName());
         fragmentsList.add(WeatherInfo.class.getName());
+        fragmentsList.add(Forecast.class.getName());
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         pagerAdapter = new MainActivity.MyPagerAdapter(getSupportFragmentManager());
         try{
@@ -147,7 +170,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         city = "london";
-        weatherQuery = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
+        weatherQueryIMP = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
+        weatherQueryMetric ="select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json";
 
 
             getDataFromInternet();
@@ -213,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
     public void getDataFromInternet(){
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(baseurl + "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json",
+        client.get(baseurl + "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json",
                 new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -232,6 +256,17 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject loc = channel.getJSONObject("location");
                     JSONObject atmosphere = channel.getJSONObject("atmosphere");
                     JSONObject wind = channel.getJSONObject("wind");
+
+
+                    String descript = item.getString("description");
+                    String[] descArr  = descript.split("<BR />");
+
+
+                    d1 = descArr[6];
+                    d2 = descArr[7];
+                    d3 = descArr[8];
+                    d4 = descArr[9];
+
 
                     MWnazwaMiejsc = loc.getString("city");
                     MNkraj = loc.getString("country");
@@ -327,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
     private class MyPagerAdapter extends FragmentPagerAdapter {
 
         public List<String> fragmentsListAdapter = new ArrayList<>();
-        private int NUM_COUNT = 4;
+        private int NUM_COUNT = 5;
 
 
         public MyPagerAdapter(FragmentManager fragmentManager) {

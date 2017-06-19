@@ -75,7 +75,7 @@ int i =  1 ;
         szerokosc = (TextView) view.findViewById(R.id.tSzerWart);
         temperatura = (TextView) view.findViewById(R.id.tTempWart);
         cisnienie = (TextView) view.findViewById(R.id.tCisWart);
-        opis = (TextView) view.findViewById(R.id.tOpis);
+       // opis = (TextView) view.findViewById(R.id.tOpis);
     }
 
 
