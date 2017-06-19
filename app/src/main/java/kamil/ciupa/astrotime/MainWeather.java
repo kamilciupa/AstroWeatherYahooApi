@@ -65,9 +65,6 @@ int i =  1 ;
                         ((MainActivity) getActivity()).getMNkraj(),
                         ((MainActivity) getActivity()).getMWtemperatura(),
                         (((MainActivity) getActivity()).getMWdesc()));
-//                opis = (TextView) view.findViewById(R.id.tOpis);
-//                i+=1;
-//                opis.setText(String.valueOf(i));
             }
         });
     }

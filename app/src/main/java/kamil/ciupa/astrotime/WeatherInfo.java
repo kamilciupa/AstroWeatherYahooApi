@@ -23,6 +23,7 @@ public class WeatherInfo extends Fragment {
     TextView wiatrKierunek;
     TextView wilgotnosc;
     TextView widocznosc;
+    TextView miastoo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,30 +32,40 @@ public class WeatherInfo extends Fragment {
         view = inflater.inflate(R.layout.fragment_weather_info, container, false);
 
 
-        try {
-            Timer autoUpdate = new Timer();
-            autoUpdate.schedule(new TimerTask() {
-                @Override
-                public void run() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true) {
                     try {
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-                                setData(((MainActivity) getActivity()).getWIwiatrKierunek(),
-                                        ((MainActivity) getActivity()).getWIwiatrSila(),
-                                        ((MainActivity) getActivity()).getWIwidocznosc(),
-                                        ((MainActivity) getActivity()).getWIwilgotnosc(),
-                                        view);
-                            }
-                        });
-                    } catch(Exception e) {}
-                }
+                        Thread.sleep(1000);
+                        update();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-            }, 0, 1);
-        } catch(Exception e) {}
+                }
+            }
+        }).start();
 
 
         return view;
     }
+
+
+    public void update(){
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                setData(((MainActivity) getActivity()).getWIwiatrKierunek(),
+                        ((MainActivity) getActivity()).getWIwiatrSila(),
+                        ((MainActivity) getActivity()).getWIwidocznosc(),
+                        ((MainActivity) getActivity()).getWIwilgotnosc(),
+                        ((MainActivity) getActivity()).getMNkraj(),
+                        ((MainActivity) getActivity()).getMWnazwaMiejsc(),
+                        view);
+            }
+        });
+    }
+
 
 
     public void initializeElements(View view){
@@ -62,9 +73,10 @@ public class WeatherInfo extends Fragment {
         wiatrKierunek = (TextView) view.findViewById(R.id.tKierunekWart);
         wilgotnosc = (TextView) view.findViewById(R.id.tWilgotWart);
         widocznosc = (TextView) view.findViewById(R.id.tWidoczWart);
+        miastoo = (TextView) view.findViewById(R.id.tMiastoInfo);
     }
 
-    public void setData(String wiatrKier, String wiatrSil, String widocz, String wilgo, View view){
+    public void setData(String wiatrKier, String wiatrSil, String widocz, String wilgo,String kraj, String miasto ,View view){
 
 
         initializeElements(view);
@@ -72,7 +84,7 @@ public class WeatherInfo extends Fragment {
         wiatrKierunek.setText(wiatrKier);
         wilgotnosc.setText(wilgo);
         widocznosc.setText(widocz);
-
+        miastoo.setText(miasto + ", " + kraj);
 
     }
 
