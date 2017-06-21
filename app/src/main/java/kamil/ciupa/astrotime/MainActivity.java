@@ -39,6 +39,7 @@ import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -182,7 +183,8 @@ public class MainActivity extends AppCompatActivity {
         weatherQueryMetric ="select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json";
 
 
-            getDataFromInternet();
+          //  getDataFromInternet();
+        getData();
 
     }
 
@@ -232,6 +234,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void getData(){
+        if(accessToInternet()){
+            getDataFromInternet();
+        } else {
+            getDataFromLocal();
+        }
+    }
+
     public boolean accessToInternet(){
 
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -240,11 +250,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void writeToFile(String data,Context context) {
-        File file = new File(context.getFilesDir(), "config");
+    private void writeToFile(String data) {
         FileOutputStream outputStream;
         try {
-            outputStream = openFileOutput("config", Context.MODE_PRIVATE);
+            outputStream = openFileOutput("dane", Context.MODE_PRIVATE);
             outputStream.write(data.getBytes());
             outputStream.close();
         } catch (Exception e) {
@@ -253,13 +262,35 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private String readFromFile(Context context) {
+    private String readFromFile() {
+        String output = "";
+
+        FileInputStream inputStream;
+        try {
+            byte[] b = new byte[3000];
+            inputStream = openFileInput("dane");
+            int i = inputStream.read(b);
+            if(i == -1){
+                Toast.makeText(this, "asdasdasdsad", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Readed local file   " + i, Toast.LENGTH_LONG).show();
+            }
+            output = new String(b);
+            inputStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return output;
+
 
     }
 
+
     public void getDataFromLocal(){
 
-        String response = readFromFile(this);
+        String response = readFromFile();
 
         try{
             JSONObject responsee = new JSONObject(response);
@@ -318,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 String response = new String(responseBody);
-                writeToFile(response, Context.);
+                writeToFile(response);
 
                 try{
                     JSONObject responsee = new JSONObject(response);
@@ -410,7 +441,10 @@ public class MainActivity extends AppCompatActivity {
                 double lattest;
                 double lontest;
                 city = cityet.getText().toString();
-                getDataFromInternet();
+               // getDataFromInternet();
+
+                getData();
+
                 lattest = Double.parseDouble(lt.getText().toString());
                 lontest = Double.parseDouble(lg.getText().toString());
                 refreshtime = Integer.parseInt(refTime.getText().toString());
