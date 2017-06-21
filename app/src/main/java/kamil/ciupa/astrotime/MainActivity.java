@@ -154,7 +154,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     String MWcisnienie ;
-
+    AstroWeatherDbAdapter astroWeatherDbAdapter;
+    ArrayAdapter<CityDataModel> citiesAdapter;
 
 
     public int getRefTime() { return refreshtime;}
@@ -190,6 +191,11 @@ public class MainActivity extends AppCompatActivity {
         city = "london";
         weatherQueryIMP = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
         weatherQueryMetric ="select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json";
+
+
+
+
+
 
 
           //  getDataFromInternet();
@@ -418,9 +424,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void saveToDB(String cityName){
+        astroWeatherDbAdapter.insertCity(cityName);
+    }
 
-
-
+    public void loadFromDB(){
+        List<CityDataModel> citiesList = astroWeatherDbAdapter.getAllCities();
+        if(citiesList.isEmpty()){
+            citiesList.add(new CityDataModel("Lodz"));
+        }
+        citiesAdapter = new ArrayAdapter<CityDataModel>(this, android.R.layout.simple_list_item_1, citiesList);
+    }
 
     /*
     Shows dialog with options. Allow to change longitude, latitude and frequency of refresh data.
@@ -438,14 +452,18 @@ public class MainActivity extends AppCompatActivity {
         Button a = (Button) dialogView.findViewById(R.id.bOK);
         Button fav = (Button) dialogView.findViewById(R.id.buttAddFav);
         final EditText cityet = (EditText) dialogView.findViewById(R.id.CityET);
-
+        astroWeatherDbAdapter = new AstroWeatherDbAdapter(this);
+        astroWeatherDbAdapter.open();
+        loadFromDB();
         Spinner dropdown = (Spinner) findViewById(R.id.spinner);
+        Spinner favSpinner = (Spinner) findViewById(R.id.spinFav);
+//        favSpinner.setAdapter(citiesAdapter);
         cityet.setText(city);
-
+//
         fav.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                saveToDB(cityet.getText().toString());
             }
         });
 
