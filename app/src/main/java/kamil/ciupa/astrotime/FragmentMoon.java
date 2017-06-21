@@ -108,6 +108,7 @@ public class FragmentMoon extends Fragment {
         int second = c.get(Calendar.SECOND);
         int timezoneOffset = c.get(Calendar.ZONE_OFFSET);
 
+
         Double latitude = Double.parseDouble(latitude1);
         Double longitude = Double.parseDouble(longitude1);
 

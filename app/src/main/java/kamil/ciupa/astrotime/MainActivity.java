@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
     String MWcisnienie ;
     AstroWeatherDbAdapter astroWeatherDbAdapter;
-    ArrayAdapter<CityDataModel> citiesAdapter;
+    ArrayAdapter<String> citiesAdapter;
 
 
     public int getRefTime() { return refreshtime;}
@@ -433,7 +433,14 @@ public class MainActivity extends AppCompatActivity {
         if(citiesList.isEmpty()){
             citiesList.add(new CityDataModel("Lodz"));
         }
-        citiesAdapter = new ArrayAdapter<CityDataModel>(this, android.R.layout.simple_list_item_1, citiesList);
+
+        List<String> stringCitiesList = new ArrayList<>();
+
+        for(CityDataModel row : citiesList){
+            stringCitiesList.add(row.getCityName());
+        }
+
+        citiesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringCitiesList);
     }
 
     /*
@@ -455,9 +462,9 @@ public class MainActivity extends AppCompatActivity {
         astroWeatherDbAdapter = new AstroWeatherDbAdapter(this);
         astroWeatherDbAdapter.open();
         loadFromDB();
-        Spinner dropdown = (Spinner) findViewById(R.id.spinner);
-        Spinner favSpinner = (Spinner) findViewById(R.id.spinFav);
-//        favSpinner.setAdapter(citiesAdapter);
+        Spinner dropdown = (Spinner) dialogView.findViewById(R.id.spinner);
+        Spinner favSpinner = (Spinner) dialogView.findViewById(R.id.spinFav);
+       favSpinner.setAdapter(citiesAdapter);
         cityet.setText(city);
 //
         fav.setOnClickListener(new View.OnClickListener(){
