@@ -432,9 +432,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText cityet = (EditText) dialogView.findViewById(R.id.CityET);
 
         Spinner dropdown = (Spinner) findViewById(R.id.spinner);
-        String[] items = new String[]{"Metryczne", "Imperialne"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
+
 
                     cityet.setText(city);
 

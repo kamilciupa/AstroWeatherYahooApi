@@ -12,6 +12,28 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/FavListLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:text="Ulubione" />
+
+        <Spinner
+            android:id="@+id/spinFav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/units_array" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
             android:id="@+id/CityTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,6 +49,13 @@
             android:text="Lodz" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttAddFav"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Dodaj do ulubionych" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,51 +74,9 @@
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/RefreshTimeTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RefreshTime" />
-
-        <EditText
-            android:id="@+id/RefreshTimeET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:text="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/LatitudeTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Latitude" />
-
-        <EditText
-            android:id="@+id/LatitudeET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberSigned"
-            android:text="1" />
+            android:layout_weight="1"
+            android:entries="@array/units_array"
+            />
 
     </LinearLayout>
 
