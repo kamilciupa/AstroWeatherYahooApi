@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:text="City" />
+            android:text="Miasto" />
 
         <EditText
             android:id="@+id/CityET"
@@ -38,16 +38,14 @@
             android:id="@+id/LongitudeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Longitude"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal"
+            android:text="Jednostki" />
 
-        <EditText
-            android:id="@+id/LongitudeET"
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberSigned"
-            android:text="1" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 

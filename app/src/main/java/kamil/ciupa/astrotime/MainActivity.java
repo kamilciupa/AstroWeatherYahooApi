@@ -22,8 +22,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -426,14 +428,14 @@ public class MainActivity extends AppCompatActivity {
 
         b = dialogBuilder.create();
         Button a = (Button) dialogView.findViewById(R.id.bOK);
-        final EditText lt = (EditText) dialogView.findViewById(R.id.LatitudeET);
-        final EditText lg = (EditText) dialogView.findViewById(R.id.LongitudeET);
-        final EditText refTime = (EditText) dialogView.findViewById(R.id.RefreshTimeET);
+
         final EditText cityet = (EditText) dialogView.findViewById(R.id.CityET);
 
-                    lt.setText(Double.toString(latitude));
-                    lg.setText(Double.toString(longitude));
-                    refTime.setText(Integer.toString(refreshtime));
+        Spinner dropdown = (Spinner) findViewById(R.id.spinner);
+        String[] items = new String[]{"Metryczne", "Imperialne"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+
                     cityet.setText(city);
 
         a.setOnClickListener(new View.OnClickListener() {
