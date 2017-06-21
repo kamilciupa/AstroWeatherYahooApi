@@ -1,12 +1,17 @@
 package kamil.ciupa.astrotime;
 
 import android.app.ProgressDialog;
+
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.provider.BaseColumns;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -53,6 +58,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import cz.msebera.android.httpclient.Header;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -414,6 +421,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     /*
     Shows dialog with options. Allow to change longitude, latitude and frequency of refresh data.
      */
@@ -428,42 +436,30 @@ public class MainActivity extends AppCompatActivity {
 
         b = dialogBuilder.create();
         Button a = (Button) dialogView.findViewById(R.id.bOK);
-
+        Button fav = (Button) dialogView.findViewById(R.id.buttAddFav);
         final EditText cityet = (EditText) dialogView.findViewById(R.id.CityET);
 
         Spinner dropdown = (Spinner) findViewById(R.id.spinner);
+        cityet.setText(city);
 
+        fav.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
 
-                    cityet.setText(city);
+            }
+        });
 
         a.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
             try {
-//                double lattest;
-//                double lontest;
                 city = cityet.getText().toString();
-               // getDataFromInternet();
-
                 getData();
-//
-//                lattest = Double.parseDouble(lt.getText().toString());
-//                lontest = Double.parseDouble(lg.getText().toString());
-//                refreshtime = Integer.parseInt(refTime.getText().toString());
-//                if(lattest >= -90 && lattest <= 90 &&  lontest >= -180 && lontest <= 180){
-//                    latitude = lattest;
-//                    longitude = lontest;
-                    b.dismiss();
-//                } else {
-//                    latitude = 0;
-//                    longitude = 0;
-//                    Toast.makeText(MainActivity.this, "Wpisz poprawną wartość", Toast.LENGTH_SHORT).show();
-//                }
+                b.dismiss();
             } catch (NumberFormatException e){
                 Toast.makeText(MainActivity.this, "Błędne dane" , Toast.LENGTH_SHORT).show();
             }
-
             }
         });
         b.show();
@@ -492,13 +488,9 @@ public class MainActivity extends AppCompatActivity {
             return Fragment.instantiate(getBaseContext(), fragmentsListAdapter.get(position));
         }
 
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            return super.getPageTitle(position);
-//        }
-//    }
     }
 }
+
 
 
 
