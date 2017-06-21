@@ -38,7 +38,7 @@ public class FragmentMoon extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.fragment_moon, container, false);
-        setMoonData(10.0, 10.0, view);
+
         clock = (TextView) view.findViewById(R.id.tTimeMoon);
 
         CountDownTimer newtimer = new CountDownTimer(1000000000, 1000) {
@@ -51,28 +51,34 @@ public class FragmentMoon extends Fragment {
             }
         };
         newtimer.start();
-        try {
-            Timer autoUpdate = new Timer();
-            autoUpdate.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    try {
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-                                setMoonData(((MainActivity) getActivity()).getLatitude(), ((MainActivity) getActivity()).getLongitude(), view);
-                            }
-                        });
-                    } catch(Exception e) {}
-                }
 
-            }, 0,300*((MainActivity) getActivity()).getRefTime());
-        } catch(Exception e) {}
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true) {
+                    try {
+                        Thread.sleep(1000);
+                        update();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }).start();
 
         return view;
     }
 
 
-
+    public void update(){
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setMoonData(((MainActivity) getActivity()).getMWdlugosc(), ((MainActivity) getActivity()).getMWszerokosc());
+            }
+        });
+    }
 
 //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -91,7 +97,7 @@ public class FragmentMoon extends Fragment {
     }
 
 
-    public void setMoonData(double latitude, double longitude, View view){
+    public void setMoonData(String latitude1, String longitude1){
 
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -101,6 +107,9 @@ public class FragmentMoon extends Fragment {
         int minute = c.get(Calendar.MINUTE);
         int second = c.get(Calendar.SECOND);
         int timezoneOffset = c.get(Calendar.ZONE_OFFSET);
+
+        Double latitude = Double.parseDouble(latitude1);
+        Double longitude = Double.parseDouble(longitude1);
 
         AstroCalculator calculator = new AstroCalculator(new AstroDateTime(year, month, day + 1, hour, minute, second, timezoneOffset, true),
                 new AstroCalculator.Location(latitude, longitude));

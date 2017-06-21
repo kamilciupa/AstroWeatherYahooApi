@@ -44,7 +44,7 @@ public class FragmentSun extends Fragment {
 
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.fragment_sun, container, false);
-        setSunData(10.0, 10.0, view );
+
 
         clock = (TextView) view.findViewById(R.id.tTimeSun);
         CountDownTimer newtimer = new CountDownTimer(1000000000, 1000) {
@@ -58,26 +58,34 @@ public class FragmentSun extends Fragment {
         };
         newtimer.start();
 
-        try {
-            Timer autoUpdate = new Timer();
-            autoUpdate.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    try {
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-                                setSunData(((MainActivity) getActivity()).getLatitude(), ((MainActivity) getActivity()).getLongitude(), view);
-                            }
-                        });
-                    } catch(Exception e) {}
-                }
 
-            }, 0, 60000*((MainActivity) getActivity()).getRefTime());
-        } catch(Exception e) {}
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true) {
+                    try {
+                        Thread.sleep(1000);
+                        update();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }).start();
+
+
         return view;
     }
 
-
+    public void update(){
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setSunData(((MainActivity) getActivity()).getMWdlugosc(), ((MainActivity) getActivity()).getMWszerokosc());
+            }
+        });
+    }
 
     public void initiateElements(View view){
         sunriseTime = (TextView) view.findViewById(R.id.tWschodSCzasWartosc);
@@ -89,7 +97,7 @@ public class FragmentSun extends Fragment {
     }
 
 
-    public void setSunData(double latitude, double longitude, View view){
+    public void setSunData(String latitude1, String longitude1){
 
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -99,6 +107,9 @@ public class FragmentSun extends Fragment {
         int minute = c.get(Calendar.MINUTE);
         int second = c.get(Calendar.SECOND);
         int timezoneOffset = c.get(Calendar.ZONE_OFFSET);
+
+        Double latitude = Double.parseDouble(latitude1);
+        Double longitude = Double.parseDouble(longitude1);
 
         AstroCalculator calculator = new AstroCalculator(new AstroDateTime(year, month, day + 1, hour, minute, second, timezoneOffset, true),
                 new AstroCalculator.Location(latitude, longitude));

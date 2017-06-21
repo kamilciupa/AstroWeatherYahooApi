@@ -271,9 +271,9 @@ public class MainActivity extends AppCompatActivity {
             inputStream = openFileInput("dane");
             int i = inputStream.read(b);
             if(i == -1){
-                Toast.makeText(this, "asdasdasdsad", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Readed local file   " + i, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Local file loaded", Toast.LENGTH_LONG).show();
             }
             output = new String(b);
             inputStream.close();
@@ -379,6 +379,9 @@ public class MainActivity extends AppCompatActivity {
                     MWcisnienie = atmosphere.getString("pressure");
                     MWdlugosc = item.getString("lat");
                     MWszerokosc = item.getString("long");
+
+
+
                     MWtemperatura = condition.getString("temp");
                     MWdesc = item.getString("description");
 
@@ -438,25 +441,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             try {
-                double lattest;
-                double lontest;
+//                double lattest;
+//                double lontest;
                 city = cityet.getText().toString();
                // getDataFromInternet();
 
                 getData();
-
-                lattest = Double.parseDouble(lt.getText().toString());
-                lontest = Double.parseDouble(lg.getText().toString());
-                refreshtime = Integer.parseInt(refTime.getText().toString());
-                if(lattest >= -90 && lattest <= 90 &&  lontest >= -180 && lontest <= 180){
-                    latitude = lattest;
-                    longitude = lontest;
+//
+//                lattest = Double.parseDouble(lt.getText().toString());
+//                lontest = Double.parseDouble(lg.getText().toString());
+//                refreshtime = Integer.parseInt(refTime.getText().toString());
+//                if(lattest >= -90 && lattest <= 90 &&  lontest >= -180 && lontest <= 180){
+//                    latitude = lattest;
+//                    longitude = lontest;
                     b.dismiss();
-                } else {
-                    latitude = 0;
-                    longitude = 0;
-                    Toast.makeText(MainActivity.this, "Wpisz poprawną wartość", Toast.LENGTH_SHORT).show();
-                }
+//                } else {
+//                    latitude = 0;
+//                    longitude = 0;
+//                    Toast.makeText(MainActivity.this, "Wpisz poprawną wartość", Toast.LENGTH_SHORT).show();
+//                }
             } catch (NumberFormatException e){
                 Toast.makeText(MainActivity.this, "Błędne dane" , Toast.LENGTH_SHORT).show();
             }
