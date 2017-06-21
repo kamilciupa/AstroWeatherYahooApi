@@ -22,40 +22,74 @@
             />
 
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/fragmentContainer"
-            android:baselineAligned="false"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            >
-
-            <fragment
-                android:id="@+id/fragment_sun"
-                android:name="kamil.ciupa.astrotime.FragmentSun"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_weight="1"
-                tools:layout="@layout/fragment_sun"></fragment>
+                android:orientation="vertical" >
 
-            <fragment
-                android:id="@+id/fragment_moon"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:name="kamil.ciupa.astrotime.FragmentMoon"
-                tools:layout="@layout/fragment_moon"> </fragment>
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        </LinearLayout>
-    </ScrollView>
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:id="@+id/fragmentContainer"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <fragment
+                            android:id="@+id/fragment_sun"
+                            android:name="kamil.ciupa.astrotime.FragmentSun"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentBottom="true"
+                            android:layout_weight="1"
+                            tools:layout="@layout/fragment_sun"></fragment>
+
+                        <fragment
+                            android:id="@+id/fragment_moon"
+                            android:name="kamil.ciupa.astrotime.FragmentMoon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            tools:layout="@layout/fragment_moon"></fragment>
+
+                        <fragment
+                            android:id="@+id/fragment_main_we"
+                            android:name="kamil.ciupa.astrotime.MainWeather"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            tools:layout="@layout/fragment_main_weather"></fragment>
+
+                        <fragment
+                            android:id="@+id/fragment_we_in"
+                            android:name="kamil.ciupa.astrotime.WeatherInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            tools:layout="@layout/fragment_weather_info"></fragment>
+
+
+                        <fragment
+                            android:id="@+id/fragment_forecast"
+                            android:name="kamil.ciupa.astrotime.Forecast"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            tools:layout="@layout/fragment_forecast"></fragment>
+
+
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </HorizontalScrollView>
 
     </android.support.design.widget.AppBarLayout>
 

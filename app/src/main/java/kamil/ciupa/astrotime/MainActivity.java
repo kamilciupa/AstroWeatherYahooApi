@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     double latitude = 10.0;
     double longitude = 10.0;
     int refreshtime = 1;
-    int metOrImp = 1;
+
     AlertDialog b;
     PagerAdapter pagerAdapter;
     ViewPager viewPager;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     String weatherQueryIMP;
     String weatherQueryMetric;
 
-
+    int metOrImp = 1;
     String MWdesc;
     String MNkraj;
     String MWnazwaMiejsc;
@@ -64,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
     String MWszerokosc ;
     String MWtemperatura ;
     String WIwiatrSila;
+    String d1;
+    String d2;
+    String d3;
+    String d4;
+
+    String WIwiatrKierunek;
+    String WIwilgotnosc;
+    String WIwidocznosc;
 
     public String getD1() {
         return d1;
@@ -81,10 +89,6 @@ public class MainActivity extends AppCompatActivity {
         return d4;
     }
 
-    String d1;
-    String d2;
-    String d3;
-    String d4;
 
     public String getMNkraj(){
         return MNkraj;
@@ -109,10 +113,6 @@ public class MainActivity extends AppCompatActivity {
     public String getWIwidocznosc() {
         return WIwidocznosc;
     }
-
-    String WIwiatrKierunek;
-    String WIwilgotnosc;
-    String WIwidocznosc;
 
     public String getMWnazwaMiejsc() {
         return MWnazwaMiejsc;
@@ -187,7 +187,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
+        outState.putString("city", city);
+        outState.putInt("metOrImp", metOrImp);
+        outState.putString("MWdesc", MWdesc);
+        outState.putString("MNkraj", MNkraj);
+        outState.putString("MNnazwaMiejsc", MWnazwaMiejsc);
+        outState.putString("MWdlugosc", MWdlugosc);
+        outState.putString("MWszerokosc", MWszerokosc);
+        outState.putString("MWcis", MWcisnienie);
+        outState.putString("MWtemperatura", MWtemperatura);
+        outState.putString("WIwiatrsila", WIwiatrSila);
+        outState.putString("d1", d1);
+        outState.putString("d2", d2);
+        outState.putString("d3", d3);
+        outState.putString("d4", d4);
+        outState.putString("WIwiatrkier", WIwiatrKierunek);
+        outState.putString("Wiwilg", WIwilgotnosc);
+        outState.putString("wiwido", WIwidocznosc);
         outState.putDouble("longitude", longitude);
         outState.putDouble("latitude", latitude);
         outState.putInt("refresh", refreshtime);
@@ -196,6 +212,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+
+        String MWcisnienie = savedInstanceState.getString("MWcis");
+        int metOrImp = savedInstanceState.getInt("metOrImp");
+         MWdesc  = savedInstanceState.getString("MWdesc");
+         MNkraj =   savedInstanceState.getString("MNkraj");
+         MWnazwaMiejsc = savedInstanceState.getString("MWnazwaMiejsc");
+         MWdlugosc  = savedInstanceState.getString("MWdlugosc");
+         MWszerokosc   = savedInstanceState.getString("MWszerokosc");
+         MWtemperatura   = savedInstanceState.getString("MWtemperatura");
+         WIwiatrSila = savedInstanceState.getString("WIwiatrsila");
+         d1 = savedInstanceState.getString("d1");
+         d2 = savedInstanceState.getString("d2");
+         d3 = savedInstanceState.getString("d3");
+         d4 = savedInstanceState.getString("d4");
+         WIwiatrKierunek = savedInstanceState.getString("WIwiatrkier");
+         WIwilgotnosc = savedInstanceState.getString("Wiwilg");
+         WIwidocznosc = savedInstanceState.getString("wiwido");
+
 
         longitude = savedInstanceState.getDouble("longitude");
         latitude = savedInstanceState.getDouble("latitude");
