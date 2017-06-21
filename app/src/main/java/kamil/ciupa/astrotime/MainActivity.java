@@ -1,23 +1,13 @@
 package kamil.ciupa.astrotime;
 
-import android.app.ProgressDialog;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.provider.BaseColumns;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.ShareCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -27,45 +17,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.astrocalculator.AstroCalculator;
-import com.astrocalculator.AstroDateTime;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import cz.msebera.android.httpclient.Header;
 
-import static java.security.AccessController.getContext;
+
 
 public class MainActivity extends AppCompatActivity {
 
     double latitude = 10.0;
     double longitude = 10.0;
     int refreshtime = 1;
+    int metOrImp = 1;
     AlertDialog b;
     PagerAdapter pagerAdapter;
     ViewPager viewPager;
@@ -74,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     String city;
     String weatherQueryIMP;
     String weatherQueryMetric;
-    WeatherInfo weatherInfo;
+
 
     String MWdesc;
     String MNkraj;
@@ -357,7 +338,18 @@ public class MainActivity extends AppCompatActivity {
     public void getDataFromInternet(){
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(baseurl + "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json",
+        String urlMet = new String("select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json");
+        String urlImp =  new String("select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json");
+
+        String url;
+        if(metOrImp == 1 ){
+            url = new String(baseurl + urlMet);
+        } else {
+           url = new String(baseurl + urlImp);
+        }
+
+        //client.get(baseurl + "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json",
+        client.get(url,
                 new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -391,24 +383,26 @@ public class MainActivity extends AppCompatActivity {
 
                     MWnazwaMiejsc = loc.getString("city");
                     MNkraj = loc.getString("country");
-                    MWcisnienie = atmosphere.getString("pressure");
+
                     MWdlugosc = item.getString("lat");
                     MWszerokosc = item.getString("long");
-
-
-
-                    MWtemperatura = condition.getString("temp");
-                    MWdesc = item.getString("description");
-
-
-
                     WIwiatrKierunek = wind.getString("direction");
                     WIwiatrSila = wind.getString("speed");
                     WIwidocznosc = atmosphere.getString("visibility");
                     WIwilgotnosc = atmosphere.getString("humidity");
 
-
-
+                    MWcisnienie = atmosphere.getString("pressure");
+                    MWtemperatura = condition.getString("temp");
+                    if(metOrImp == 1) {
+                        MWtemperatura = MWtemperatura + " C";
+                        MWcisnienie = MWcisnienie + " mb";
+                        WIwiatrSila = WIwiatrSila + " km/h";
+                    } else {
+                        MWtemperatura = MWtemperatura + " F";
+                        MWcisnienie = MWcisnienie + " in";
+                        WIwiatrSila = WIwiatrSila + " mph";
+                    }
+                    MWdesc = item.getString("description");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -425,6 +419,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveToDB(String cityName){
+        boolean isInside = false;
+        List<CityDataModel> citiesList = astroWeatherDbAdapter.getAllCities();
+        List<String> stringCitiesList = new ArrayList<>();
+        for(CityDataModel row : citiesList){
+            stringCitiesList.add(row.getCityName());
+        }
+        for(String row : stringCitiesList){
+            if(row.equals(cityName))
+                isInside = true;
+        }
+
+        if(!isInside)
         astroWeatherDbAdapter.insertCity(cityName);
     }
 
@@ -459,18 +465,49 @@ public class MainActivity extends AppCompatActivity {
         Button a = (Button) dialogView.findViewById(R.id.bOK);
         Button fav = (Button) dialogView.findViewById(R.id.buttAddFav);
         final EditText cityet = (EditText) dialogView.findViewById(R.id.CityET);
+        cityet.setText(city);
         astroWeatherDbAdapter = new AstroWeatherDbAdapter(this);
         astroWeatherDbAdapter.open();
         loadFromDB();
-        Spinner dropdown = (Spinner) dialogView.findViewById(R.id.spinner);
-        Spinner favSpinner = (Spinner) dialogView.findViewById(R.id.spinFav);
-       favSpinner.setAdapter(citiesAdapter);
-        cityet.setText(city);
-//
+        final Spinner dropdown = (Spinner) dialogView.findViewById(R.id.spinner);
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selection = dropdown.getSelectedItem().toString();
+                if(selection.equals("Metryczne")){
+                    metOrImp = 1;
+                } else {
+                    metOrImp = 2;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        final Spinner favSpinner = (Spinner) dialogView.findViewById(R.id.spinFav);
+        favSpinner.setAdapter(citiesAdapter);
+        favSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selection = favSpinner.getSelectedItem().toString();
+                cityet.setText(selection);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         fav.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 saveToDB(cityet.getText().toString());
+                loadFromDB();
             }
         });
 
