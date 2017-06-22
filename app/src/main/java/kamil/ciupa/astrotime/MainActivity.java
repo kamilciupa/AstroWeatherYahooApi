@@ -167,19 +167,9 @@ public class MainActivity extends AppCompatActivity {
         //
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         city = "london";
         weatherQueryIMP = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
         weatherQueryMetric ="select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json";
-
-
-
-
-
-
-
-          //  getDataFromInternet();
         getData();
 
     }
@@ -258,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
             showOptionsDialog();
         }
         if( id == R.id.refreshButton){
-            getDataFromInternet();
+            getData();
         }
         return super.onOptionsItemSelected(item);
     }

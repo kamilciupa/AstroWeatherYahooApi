@@ -23,7 +23,10 @@ public class Forecast extends Fragment {
     TextView day2;
     TextView day3;
     TextView day4;
-
+    String d1;
+     String d2;
+     String d3;
+     String d4;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,8 +40,11 @@ public class Forecast extends Fragment {
             public void run() {
                 while(true) {
                     try {
-                        Thread.sleep(1000);
-                        update();
+                        Thread.sleep(10000);
+                        getData(((MainActivity) getActivity()).getD1(),
+                                ((MainActivity) getActivity()).getD2(),
+                                ((MainActivity) getActivity()).getD3(),
+                                ((MainActivity) getActivity()).getD4());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -52,15 +58,23 @@ public class Forecast extends Fragment {
         return view;
     }
 
-
+    public void getData(String d1, String d2, String d3, String d4){
+        if(!this.d1.equals(d1)){
+            update();
+        }
+        this.d1 = d1;
+        this.d2 = d2;
+        this.d3 = d3;
+        this.d4 = d4;
+    }
     public void update(){
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                setData(((MainActivity) getActivity()).getD1(),
-                        ((MainActivity) getActivity()).getD2(),
-                        ((MainActivity) getActivity()).getD3(),
-                        ((MainActivity) getActivity()).getD4()
+                setData(d1,
+                        d2,
+                        d3,
+                        d4
                         );
             }
         });

@@ -26,6 +26,15 @@ public class MainWeather extends Fragment {
     TextView cisnienie;
     TextView opis;
 int i =  1 ;
+
+    String cis;
+    String dl;
+    String szer;
+    String nazwa;
+    String kraj;
+    String temp;
+    String desc;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -39,7 +48,13 @@ int i =  1 ;
                 while(true) {
                     try {
                         Thread.sleep(1000);
-                        update();
+                        getData(((MainActivity) getActivity()).getMWcisnienie(),
+                                ((MainActivity) getActivity()).getMWdlugosc(),
+                                ((MainActivity) getActivity()).getMWszerokosc(),
+                                ((MainActivity) getActivity()).getMWnazwaMiejsc(),
+                                ((MainActivity) getActivity()).getMNkraj(),
+                                ((MainActivity) getActivity()).getMWtemperatura(),
+                                (((MainActivity) getActivity()).getMWdesc()));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -53,18 +68,29 @@ int i =  1 ;
         return view;
     }
 
-
+    public void getData(String cis, String dl, String szer, String nazwa, String kraj, String temp, String desc){
+        if(!this.nazwa.equals(nazwa)){
+            update();
+        }
+        this.cis = cis;
+        this.dl = dl;
+        this.szer = szer;
+        this.nazwa = nazwa;
+        this.kraj = kraj;
+        this.temp = temp;
+        this.desc = desc;
+        }
     public void update(){
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                setData(((MainActivity) getActivity()).getMWcisnienie(),
-                        ((MainActivity) getActivity()).getMWdlugosc(),
-                        ((MainActivity) getActivity()).getMWszerokosc(),
-                        ((MainActivity) getActivity()).getMWnazwaMiejsc(),
-                        ((MainActivity) getActivity()).getMNkraj(),
-                        ((MainActivity) getActivity()).getMWtemperatura(),
-                        (((MainActivity) getActivity()).getMWdesc()));
+                setData(cis,
+                        dl,
+                        szer,
+                        nazwa,
+                        kraj,
+                        temp,
+                        desc);
             }
         });
     }

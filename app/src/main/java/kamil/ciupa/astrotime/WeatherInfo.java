@@ -24,6 +24,14 @@ public class WeatherInfo extends Fragment {
     TextView wilgotnosc;
     TextView widocznosc;
     TextView miastoo;
+    String wiatrKier;
+     String wiatrSil;
+     String widocz;
+     String wilgo;
+    String kraj;
+     String miasto;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,7 +46,12 @@ public class WeatherInfo extends Fragment {
                 while(true) {
                     try {
                         Thread.sleep(1000);
-                        update();
+                        getData(((MainActivity) getActivity()).getWIwiatrKierunek(),
+                                ((MainActivity) getActivity()).getWIwiatrSila(),
+                                ((MainActivity) getActivity()).getWIwidocznosc(),
+                                ((MainActivity) getActivity()).getWIwilgotnosc(),
+                                ((MainActivity) getActivity()).getMNkraj(),
+                                ((MainActivity) getActivity()).getMWnazwaMiejsc());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -52,15 +65,27 @@ public class WeatherInfo extends Fragment {
     }
 
 
+    public void getData(String wiatrKier, String wiatrSil, String widocz, String wilgo,String kraj, String miasto){
+        if(!this.miasto.equals(miasto)){
+            update();
+        }
+        this.wiatrKier = wiatrKier;
+        this.wiatrSil = wiatrSil;
+        this.widocz = widocz;
+        this.wilgo = wilgo;
+        this.kraj = kraj;
+        this.miasto = miasto;
+    }
+
     public void update(){
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                setData(((MainActivity) getActivity()).getWIwiatrKierunek(),
-                        ((MainActivity) getActivity()).getWIwiatrSila(),
-                        ((MainActivity) getActivity()).getWIwidocznosc(),
-                        ((MainActivity) getActivity()).getWIwilgotnosc(),
-                        ((MainActivity) getActivity()).getMNkraj(),
-                        ((MainActivity) getActivity()).getMWnazwaMiejsc(),
+                setData(wiatrKier,
+                        wiatrSil,
+                        widocz,
+                        wilgo,
+                        kraj,
+                        miasto,
                         view);
             }
         });

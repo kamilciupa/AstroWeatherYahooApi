@@ -64,7 +64,7 @@ public class FragmentSun extends Fragment {
             public void run() {
                 while(true) {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(10000);
                         update();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
