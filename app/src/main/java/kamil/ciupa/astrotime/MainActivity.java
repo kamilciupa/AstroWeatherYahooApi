@@ -52,98 +52,80 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     List<String> fragmentsList;
     String baseurl = "https://query.yahooapis.com/v1/public/yql?q=";
-    String city;
+    String city = "a";
     String weatherQueryIMP;
     String weatherQueryMetric;
 
     int metOrImp = 1;
-    String MWdesc;
-    String MNkraj;
-    String MWnazwaMiejsc;
-    String MWdlugosc ;
-    String MWszerokosc ;
-    String MWtemperatura ;
-    String WIwiatrSila;
-    String d1;
-    String d2;
-    String d3;
-    String d4;
+    String MWdesc = "s";
+    String MNkraj = "a";
+    String MWnazwaMiejsc = "init";
+    String MWdlugosc = "23" ;
+    String MWszerokosc = "23";
+    String MWtemperatura  = "23";
+    String WIwiatrSila = "23";
+    String d1 = "init";
+    String d2 = "init";
+    String d3 =  "init";
+    String d4= "init";
 
     String WIwiatrKierunek;
     String WIwilgotnosc;
     String WIwidocznosc;
-
-    public String getD1() {
-        return d1;
-    }
-
-    public String getD2() {
-        return d2;
-    }
-
-    public String getD3() {
-        return d3;
-    }
-
-    public String getD4() {
-        return d4;
-    }
-
-
-    public String getMNkraj(){
-        return MNkraj;
-    }
-
-    public String getMWdesc(){
-        return MWdesc;
-    }
-
-    public String getWIwiatrSila() {
-        return WIwiatrSila;
-    }
-
-    public String getWIwiatrKierunek() {
-        return WIwiatrKierunek;
-    }
-
-    public String getWIwilgotnosc() {
-        return WIwilgotnosc;
-    }
-
-    public String getWIwidocznosc() {
-        return WIwidocznosc;
-    }
-
-    public String getMWnazwaMiejsc() {
-        return MWnazwaMiejsc;
-    }
-
-    public String getMWdlugosc() {
-        return MWdlugosc;
-    }
-
-    public String getMWszerokosc() {
-        return MWszerokosc;
-    }
-
-    public String getMWtemperatura() {
-        return MWtemperatura;
-    }
-
-    public String getMWcisnienie() {
-        return MWcisnienie;
-    }
-
     String MWcisnienie ;
     AstroWeatherDbAdapter astroWeatherDbAdapter;
     ArrayAdapter<String> citiesAdapter;
 
 
+    public String getD1() {
+        return d1;
+    }
+    public String getD2() {
+        return d2;
+    }
+    public String getD3() {
+        return d3;
+    }
+    public String getD4() {
+        return d4;
+    }
+    public String getMNkraj(){
+        return MNkraj;
+    }
+    public String getMWdesc(){
+        return MWdesc;
+    }
+    public String getWIwiatrSila() {
+        return WIwiatrSila;
+    }
+    public String getWIwiatrKierunek() {
+        return WIwiatrKierunek;
+    }
+    public String getWIwilgotnosc() {
+        return WIwilgotnosc;
+    }
+    public String getWIwidocznosc() {
+        return WIwidocznosc;
+    }
+    public String getMWnazwaMiejsc() {
+        return MWnazwaMiejsc;
+    }
+    public String getMWdlugosc() {
+        return MWdlugosc;
+    }
+    public String getMWszerokosc() {
+        return MWszerokosc;
+    }
+    public String getMWtemperatura() {
+        return MWtemperatura;
+    }
+    public String getMWcisnienie() {
+        return MWcisnienie;
+    }
     public int getRefTime() { return refreshtime;}
     public double getLatitude(){
         return latitude;
     }
-
     public double getLongitude(){
         return longitude;
     }
@@ -170,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
         city = "london";
         weatherQueryIMP = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
         weatherQueryMetric ="select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json";
-        getData();
+
+      //  getData();
 
     }
 
@@ -194,14 +177,15 @@ public class MainActivity extends AppCompatActivity {
         outState.putString("WIwiatrkier", WIwiatrKierunek);
         outState.putString("Wiwilg", WIwilgotnosc);
         outState.putString("wiwido", WIwidocznosc);
-        outState.putDouble("longitude", longitude);
-        outState.putDouble("latitude", latitude);
-        outState.putInt("refresh", refreshtime);
+        outState.putString("baseurl", baseurl);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+
+
+        city = savedInstanceState.getString("city");
 
         MWcisnienie = savedInstanceState.getString("MWcis");
         metOrImp = savedInstanceState.getInt("metOrImp");
@@ -219,11 +203,9 @@ public class MainActivity extends AppCompatActivity {
          WIwiatrKierunek = savedInstanceState.getString("WIwiatrkier");
          WIwilgotnosc = savedInstanceState.getString("Wiwilg");
          WIwidocznosc = savedInstanceState.getString("wiwido");
+        baseurl = savedInstanceState.getString("baseurl");
 
 
-        longitude = savedInstanceState.getDouble("longitude");
-        latitude = savedInstanceState.getDouble("latitude");
-        refreshtime = savedInstanceState.getInt("refresh");
     }
 
     @Override
@@ -248,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             showOptionsDialog();
         }
         if( id == R.id.refreshButton){
-            getData();
+           // getData();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -258,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
         if(accessToInternet()){
             getDataFromInternet();
         } else {
-            getDataFromLocal();
+           getDataFromLocal();
         }
     }
 
@@ -541,7 +523,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
             try {
                 city = cityet.getText().toString();
-                getData();
+              //  getData();
                 b.dismiss();
             } catch (NumberFormatException e){
                 Toast.makeText(MainActivity.this, "Błędne dane" , Toast.LENGTH_SHORT).show();

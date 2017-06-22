@@ -30,7 +30,7 @@ int i =  1 ;
     String cis;
     String dl;
     String szer;
-    String nazwa;
+    String nazwa = "initial";
     String kraj;
     String temp;
     String desc;
@@ -47,14 +47,14 @@ int i =  1 ;
             public void run() {
                 while(true) {
                     try {
-                        Thread.sleep(1000);
-                        getData(((MainActivity) getActivity()).getMWcisnienie(),
+                        Thread.sleep(5000);
+/*                        getData(((MainActivity) getActivity()).getMWcisnienie(),
                                 ((MainActivity) getActivity()).getMWdlugosc(),
                                 ((MainActivity) getActivity()).getMWszerokosc(),
                                 ((MainActivity) getActivity()).getMWnazwaMiejsc(),
                                 ((MainActivity) getActivity()).getMNkraj(),
                                 ((MainActivity) getActivity()).getMWtemperatura(),
-                                (((MainActivity) getActivity()).getMWdesc()));
+                                (((MainActivity) getActivity()).getMWdesc()));*/
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -69,9 +69,7 @@ int i =  1 ;
     }
 
     public void getData(String cis, String dl, String szer, String nazwa, String kraj, String temp, String desc){
-        if(!this.nazwa.equals(nazwa)){
-            update();
-        }
+
         this.cis = cis;
         this.dl = dl;
         this.szer = szer;

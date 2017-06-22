@@ -23,13 +23,13 @@ public class Forecast extends Fragment {
     TextView day2;
     TextView day3;
     TextView day4;
-    String d1;
+    String d1 = "initial";
      String d2;
      String d3;
      String d4;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.fragment_forecast, container, false);
@@ -40,8 +40,8 @@ public class Forecast extends Fragment {
             public void run() {
                 while(true) {
                     try {
-                        Thread.sleep(10000);
-                        getData(((MainActivity) getActivity()).getD1(),
+                        Thread.sleep(5000);
+                       getData(((MainActivity) getActivity()).getD1(),
                                 ((MainActivity) getActivity()).getD2(),
                                 ((MainActivity) getActivity()).getD3(),
                                 ((MainActivity) getActivity()).getD4());
@@ -52,16 +52,14 @@ public class Forecast extends Fragment {
                 }
             }
         }).start();
-
-
-
         return view;
     }
 
+
+
+
     public void getData(String d1, String d2, String d3, String d4){
-        if(!this.d1.equals(d1)){
-            update();
-        }
+
         this.d1 = d1;
         this.d2 = d2;
         this.d3 = d3;

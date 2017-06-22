@@ -17,7 +17,7 @@ import java.util.List;
 public class AstroWeatherDbAdapter {
 
     private static final int DB_VERSION = 1;
-    private static final String DB_NAME = "databaseAstro2.db";
+    private static final String DB_NAME = "databaseAstro5.db";
     private static final String DB_ASTROWEATHER_TABLE = "astroTable";
 
     public static final String KEY_ID = "_id";
