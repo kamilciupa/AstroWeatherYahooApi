@@ -64,6 +64,8 @@ public class Forecast extends Fragment {
         this.d2 = d2;
         this.d3 = d3;
         this.d4 = d4;
+       // setData(this.d1, this.d2, this.d3, this.d4);
+        update();
     }
     public void update(){
         getActivity().runOnUiThread(new Runnable() {

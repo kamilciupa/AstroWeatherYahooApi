@@ -9,160 +9,176 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-
-
-
-    <TextView
-        android:id="@+id/tMoon"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Księżyc"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tTimeMoon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="00:00:00"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tMoonWschod"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Wschód"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="80sp" />
 
-    <TextView
-        android:id="@+id/tMoonWschodCzas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Czas"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Księżyc"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tMoonWschodCzasWart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tTimeMoon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="00:00:00"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tMoonZachod"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Zachód"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonWschod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Wschód"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tMoonZachodCzas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Czas"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonWschodCzas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Czas"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tMoonZachodCzasWart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonWschodCzasWart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="--"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tMoonNowipelnia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nów i Pełnia"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonZachod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Zachód"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tMoonNow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nów"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonZachodCzas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Czas"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tMoonNowWart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonZachodCzasWart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="--"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tMoonpelnia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pełnia"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonNowipelnia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Nów i Pełnia"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tMoonpelniaWart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Nów"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tMoonfazaidzien"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Faza księżyca i dzień miesiąca synodycznego"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonNowWart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="--"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tMoonFaza"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Faza księżyca"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonpelnia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Pełnia"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tMoonFazaWart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonpelniaWart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="--"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tMoonDzien"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dzień miesiąca synodycznego"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonfazaidzien"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Faza księżyca i dzień miesiąca synodycznego"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tMoonDzienWart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tMoonFaza"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Faza księżyca"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tMoonFazaWart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="--"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tMoonDzien"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Dzień miesiąca synodycznego"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tMoonDzienWart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="--"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

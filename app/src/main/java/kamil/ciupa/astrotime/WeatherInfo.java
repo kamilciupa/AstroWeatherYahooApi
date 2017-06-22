@@ -46,12 +46,12 @@ public class WeatherInfo extends Fragment {
                 while(true) {
                     try {
                         Thread.sleep(5000);
-/*                        getData(((MainActivity) getActivity()).getWIwiatrKierunek(),
+                        getData(((MainActivity) getActivity()).getWIwiatrKierunek(),
                                 ((MainActivity) getActivity()).getWIwiatrSila(),
                                 ((MainActivity) getActivity()).getWIwidocznosc(),
                                 ((MainActivity) getActivity()).getWIwilgotnosc(),
                                 ((MainActivity) getActivity()).getMNkraj(),
-                                ((MainActivity) getActivity()).getMWnazwaMiejsc());*/
+                                ((MainActivity) getActivity()).getMWnazwaMiejsc());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -73,6 +73,7 @@ public class WeatherInfo extends Fragment {
         this.wilgo = wilgo;
         this.kraj = kraj;
         this.miasto = miasto;
+       update();
     }
 
     public void update(){
@@ -103,7 +104,7 @@ public class WeatherInfo extends Fragment {
 
 
         initializeElements(view);
-        wiatrSila.setText(wiatrSil + " mph");
+        wiatrSila.setText(wiatrSil);
         wiatrKierunek.setText(wiatrKier);
         wilgotnosc.setText(wilgo);
         widocznosc.setText(widocz);

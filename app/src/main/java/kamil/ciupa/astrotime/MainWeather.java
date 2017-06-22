@@ -48,13 +48,13 @@ int i =  1 ;
                 while(true) {
                     try {
                         Thread.sleep(5000);
-/*                        getData(((MainActivity) getActivity()).getMWcisnienie(),
+                        getData(((MainActivity) getActivity()).getMWcisnienie(),
                                 ((MainActivity) getActivity()).getMWdlugosc(),
                                 ((MainActivity) getActivity()).getMWszerokosc(),
                                 ((MainActivity) getActivity()).getMWnazwaMiejsc(),
                                 ((MainActivity) getActivity()).getMNkraj(),
                                 ((MainActivity) getActivity()).getMWtemperatura(),
-                                (((MainActivity) getActivity()).getMWdesc()));*/
+                                (((MainActivity) getActivity()).getMWdesc()));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -77,6 +77,8 @@ int i =  1 ;
         this.kraj = kraj;
         this.temp = temp;
         this.desc = desc;
+        //setData(this.cis, this.dl, this.szer, this.nazwa, this.kraj, this.temp, this.desc);
+        update();
         }
     public void update(){
         getActivity().runOnUiThread(new Runnable() {
@@ -110,8 +112,8 @@ int i =  1 ;
         nazwaMiejsc.setText(nazwa + ", " + kraj);
         dlugosc.setText(dl);
         szerokosc.setText(szer);
-        temperatura.setText(temp + " F");
-        cisnienie.setText(cis + " in");
+        temperatura.setText(temp);
+        cisnienie.setText(cis);
         //opis.setText(desc);
 
     }

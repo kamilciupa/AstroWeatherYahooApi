@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         weatherQueryIMP = "select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)&format=json";
         weatherQueryMetric ="select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22"+city+"%22)and%20u=\"c\"&format=json";
 
-      //  getData();
+        getData();
 
     }
 
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             showOptionsDialog();
         }
         if( id == R.id.refreshButton){
-           // getData();
+            getData();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -299,41 +299,39 @@ public class MainActivity extends AppCompatActivity {
             JSONObject query = responsee.getJSONObject("query");
             JSONObject results = query.getJSONObject("results");
             JSONObject channel = results.getJSONObject("channel");
-
             JSONObject item = channel.getJSONObject("item");
             JSONObject condition = item.getJSONObject("condition");
             JSONObject loc = channel.getJSONObject("location");
             JSONObject atmosphere = channel.getJSONObject("atmosphere");
             JSONObject wind = channel.getJSONObject("wind");
 
-
             String descript = item.getString("description");
             String[] descArr  = descript.split("<BR />");
-
-
             d1 = descArr[6];
             d2 = descArr[7];
             d3 = descArr[8];
             d4 = descArr[9];
 
-
             MWnazwaMiejsc = loc.getString("city");
             MNkraj = loc.getString("country");
-            MWcisnienie = atmosphere.getString("pressure");
             MWdlugosc = item.getString("lat");
             MWszerokosc = item.getString("long");
-            MWtemperatura = condition.getString("temp");
-            MWdesc = item.getString("description");
-
-
-
             WIwiatrKierunek = wind.getString("direction");
             WIwiatrSila = wind.getString("speed");
             WIwidocznosc = atmosphere.getString("visibility");
             WIwilgotnosc = atmosphere.getString("humidity");
-
-
-
+            MWcisnienie = atmosphere.getString("pressure");
+            MWtemperatura = condition.getString("temp");
+            if(metOrImp == 1) {
+                MWtemperatura = MWtemperatura + " C";
+                MWcisnienie = MWcisnienie + " mb";
+                WIwiatrSila = WIwiatrSila + " km/h";
+            } else {
+                MWtemperatura = MWtemperatura + " F";
+                MWcisnienie = MWcisnienie + " in";
+                WIwiatrSila = WIwiatrSila + " mph";
+            }
+            MWdesc = item.getString("description");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -523,7 +521,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
             try {
                 city = cityet.getText().toString();
-              //  getData();
+                getData();
                 b.dismiss();
             } catch (NumberFormatException e){
                 Toast.makeText(MainActivity.this, "Błędne dane" , Toast.LENGTH_SHORT).show();

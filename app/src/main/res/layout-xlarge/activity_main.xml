@@ -23,22 +23,59 @@
         android:baselineAligned="false"
         android:orientation="vertical">
 
-        <fragment
-            android:id="@+id/fragment_sun"
-            android:name="kamil.ciupa.astrotime.FragmentSun"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_weight="1"
-            tools:layout="@layout/fragment_sun"></fragment>
+            android:layout_weight="1">
 
-        <fragment
-            android:id="@+id/fragment_moon"
-            android:name="kamil.ciupa.astrotime.FragmentMoon"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:layout="@layout/fragment_moon"></fragment>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <fragment
+                    android:id="@+id/fragment_moon"
+                    android:name="kamil.ciupa.astrotime.FragmentMoon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:layout="@layout/fragment_moon"></fragment>
+
+                <fragment
+                    android:id="@+id/fragment_sun"
+                    android:name="kamil.ciupa.astrotime.FragmentSun"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    tools:layout="@layout/fragment_sun"></fragment>
+
+                <fragment
+                    android:id="@+id/fragment_forecast"
+                    android:name="kamil.ciupa.astrotime.Forecast"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:layout="@layout/fragment_forecast"></fragment>
+
+                <fragment
+                    android:id="@+id/fragment_we_in"
+                    android:name="kamil.ciupa.astrotime.WeatherInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:layout="@layout/fragment_weather_info"></fragment>
+
+                <fragment
+                    android:id="@+id/fragment_main_we"
+                    android:name="kamil.ciupa.astrotime.MainWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:layout="@layout/fragment_main_weather"></fragment>
+            </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
 
