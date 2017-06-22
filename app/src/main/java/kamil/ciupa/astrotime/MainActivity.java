@@ -213,8 +213,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        String MWcisnienie = savedInstanceState.getString("MWcis");
-        int metOrImp = savedInstanceState.getInt("metOrImp");
+        MWcisnienie = savedInstanceState.getString("MWcis");
+        metOrImp = savedInstanceState.getInt("metOrImp");
          MWdesc  = savedInstanceState.getString("MWdesc");
          MNkraj =   savedInstanceState.getString("MNkraj");
          MWnazwaMiejsc = savedInstanceState.getString("MWnazwaMiejsc");
